@@ -2,8 +2,6 @@ package dev.okempi.todolist.Controller;
 
 import dev.okempi.todolist.Model.Model;
 
-import java.io.*;
-
 public class Controller {
     final private Model model;
     final public String log = "C:\\Users\\Venia\\Documents\\shits\\Programovani\\java\\learning\\app\\ToDoList\\src\\main\\resources\\dev\\okempi\\todolist\\log.txt";
@@ -12,6 +10,7 @@ public class Controller {
         this.model = new Model();
     }
 
+    /*
     public String[] fetch(String task){
         String values = model.fetch_task(task);
         String[] test = values.split(",");
@@ -25,6 +24,8 @@ public class Controller {
         }
         else {return test;}
     }
+
+     */
 
     public void remove_task(int date, String task){
         return;
