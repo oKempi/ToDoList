@@ -6,6 +6,9 @@ module dev.okempi.todolist {
 
     opens dev.okempi.todolist to javafx.fxml;
     exports dev.okempi.todolist.Controller;
+    opens dev.okempi.todolist.Controller to javafx.fxml;
     exports dev.okempi.todolist.Model;
+    opens dev.okempi.todolist.Model to javafx.fxml;
     exports dev.okempi.todolist.View;
+    opens dev.okempi.todolist.View to javafx.fxml;
 }
