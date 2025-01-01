@@ -9,63 +9,49 @@ public class Model {
 
     public ArrayList<Task> tasks = new ArrayList<>();
 
-    public void add_task(LocalDate date, String text){
-        tasks.add(new Task(text, date));
-        //save_tasks();
+    public void save_tasks() {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(database))) {
+            for (int i = 0; i < tasks.size(); i++) {
+                bw.write(tasks.get(i).toLine() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
-    public void save
+    public void load_tasks() {
+        String line;
+        try (BufferedReader br = new BufferedReader(new FileReader(database))) {
+            while ((line = br.readLine()) != null) {
+                tasks.add(Task.fromLine(line));
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
 
+    public void add_task(LocalDate date, String text) {
+        tasks.add(new Task(text, date));
+        save_tasks();
+    }
 
+    // through UUID?
+    public void remove_task(Task task) {
+        tasks.remove(task);
+        save_tasks();
+    }
 
+    public Task fetch_task(String uuid){
+        for (int i = 0; i < tasks.size(); i++){
+            String task_uuid = tasks.get(i).getUUID();
+            if (task_uuid == uuid){
+                return tasks.get(i);
+            }
+        }
+        return null;
+    }
 
-
-
-
-
-
-
-
-
-// methods
-//    public void load_tasks(){
-//        String line;
-//        try (BufferedReader br = new BufferedReader(new FileReader(database))){
-//            while ((line = br.readLine()) != null){
-//                String[] parts = line.split(",");
-//                dates.add(Integer.parseInt(parts[0]));
-//                tasks.add(parts[1]);
-//            }
-//        }
-//        catch (IOException e){System.out.println(e);}
-//    }
-//
-//    public void save_tasks(){  //void / int
-//        String line;
-//        try (BufferedWriter bw = new BufferedWriter(new FileWriter(database))){
-//            bw.write(dates.get(0) + "," + tasks.get(0));
-//            for (int i = 1; i < tasks.size(); i++){
-//                line = "\n" + dates.get(i) + "," + tasks.get(i);
-//                bw.write(line);
-//            }
-//        }
-//        catch (IOException e){System.out.println(e);}
-//    }
-//
-//    public void remove_task(String task){
-//        int pos = tasks.indexOf(task);
-//        tasks.remove(tasks.get(pos));
-//        dates.remove(dates.get(pos));
-//    }
-//
-//    public void add_task(int Date, String task){
-//        dates.add(Date);
-//        tasks.add(task);
-//        save_tasks();
-//    }
-//
-//    public String fetch_task(String task){
-//        //I am truly sorry to whoever has to read this horrendous thing...
-//        return tasks.get(tasks.indexOf(task)) + "," + dates.get(dates.indexOf(tasks.indexOf(task)));
-//    }
+    public int task_amount(){
+        return tasks.size();
+    }
 }

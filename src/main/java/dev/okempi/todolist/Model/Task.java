@@ -8,13 +8,14 @@ public class Task {
     public LocalDate date = null;
     private UUID uuid = UUID.randomUUID();
 
-    public Task(String text){
-        this.text = text;
-    }
 
     public Task(String text, LocalDate date){
         this.text = text;
         this.date = date;
+    }
+
+    public Task(String text){
+        this.text = text;
     }
 
     public String getUUID(){

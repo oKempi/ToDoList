@@ -4,7 +4,6 @@ module dev.okempi.todolist {
 
     requires org.controlsfx.controls;
 
-    opens dev.okempi.todolist to javafx.fxml;
     exports dev.okempi.todolist.Controller;
     opens dev.okempi.todolist.Controller to javafx.fxml;
     exports dev.okempi.todolist.Model;
