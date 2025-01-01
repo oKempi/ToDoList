@@ -35,12 +35,13 @@ public class Model {
         save_tasks();
     }
 
-    // through UUID?
-    // also needs rework because you literally can not access ask from
-    // anywhere else
-    public void remove_task(Task task) {
-        tasks.remove(task);
-        save_tasks();
+    public void remove_task(String text) {
+        for (int i = 0; i < tasks.size(); i++){
+            if (tasks.get(i).toLine().equals(text)){
+                tasks.remove(tasks.get(i));
+                save_tasks();
+            }
+        }
     }
 
     public String fetch_task(String uuid){

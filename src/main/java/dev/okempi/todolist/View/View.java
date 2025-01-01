@@ -24,6 +24,8 @@ public class View extends Application {
     public void start(Stage stage) throws Exception {
         //initialization
         controller.load_tasks();
+        Label label = new Label("You have " + controller.task_amount() + " tasks");
+
 
         //graphic part
         VBox root = new VBox(20);
@@ -35,17 +37,26 @@ public class View extends Application {
             VBox taskVBox = new VBox(20);
             String labelContent = controller.fetch_task(i).replace(",", " ");
             Label taskContent = new Label(labelContent);
-            taskVBox.getChildren().add(taskContent);
+
+            Button remove_task = new Button("Remove");
+            remove_task.setStyle("-fx-background-color: red;");
+            remove_task.setOnAction(actionEvent -> {
+                VBox taskVBoxToRemove = (VBox) ((Button) actionEvent.getSource()).getParent();
+                Label taskContentToRemove = (Label) taskVBoxToRemove.getChildren().get(0);
+                String taskText = taskContent.getText();
+                controller.remove_task(taskText.replaceFirst(" ", ","));
+                TaskBox.getChildren().remove(taskVBoxToRemove);
+                label.setText("You have " + controller.task_amount() + " tasks");
+            });
+
+            taskVBox.getChildren().addAll(taskContent, remove_task);
             TaskBox.getChildren().add(taskVBox);
         }
-
-        Label label = new Label("You have " + controller.task_amount() + " tasks");
 
         TextField txtField = new TextField();
         txtField.setPromptText("Your task");
         DatePicker date = new DatePicker();
         Button addTask = new Button("Add task!");
-
 
         // logic
         addTask.setOnAction(actionEvent -> {
@@ -55,7 +66,6 @@ public class View extends Application {
                 label.setText("You have " + controller.task_amount() + " tasks");
             }
         });
-
 
         funcs.getChildren().addAll(txtField, date, addTask);
         root.getChildren().addAll(label, funcs, TaskBox);

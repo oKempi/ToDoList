@@ -14,8 +14,8 @@ public class Controller {
         this.model = new Model();
     }
 
-    public void remove_task(int date, String task){
-        return;
+    public void remove_task(String task){
+        model.remove_task(task);
     }
 
     public void load_tasks(){ //there is not much more to do here...
