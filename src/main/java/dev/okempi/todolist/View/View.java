@@ -25,9 +25,6 @@ public class View extends Application {
         //initialization
         controller.load_tasks();
 
-        // methods
-
-
         //graphic part
         VBox root = new VBox(20);
         HBox funcs = new HBox(20);
@@ -39,10 +36,13 @@ public class View extends Application {
         DatePicker date = new DatePicker();
         Button addTask = new Button("Add task!");
 
+
+        // logic
         addTask.setOnAction(actionEvent -> {
             String content = txtField.getText();
-            if (date.getValue() != null){
+            if (content != null){
                 controller.add_task(date.getValue(), content);
+                label.setText("You have " + controller.task_amount() + " tasks");
             }
         });
 

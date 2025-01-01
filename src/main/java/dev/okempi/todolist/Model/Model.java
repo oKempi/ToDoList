@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Model {
-    final public String database = "java/dev/okempi/todolist/Model/dataBase.csv";
+    final public String database = "src/main/java/dev/okempi/todolist/Model/dataBase.csv";
 
     public ArrayList<Task> tasks = new ArrayList<>();
 

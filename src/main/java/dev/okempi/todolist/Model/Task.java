@@ -8,7 +8,6 @@ public class Task {
     public LocalDate date = null;
     private UUID uuid = UUID.randomUUID();
 
-
     public Task(String text, LocalDate date){
         this.text = text;
         this.date = date;
@@ -34,7 +33,7 @@ public class Task {
     public static Task fromLine(String line){
         String[] parts = line.split(",");
         if (parts.length == 2){
-            return new Task(parts[0], LocalDate.parse(parts[1]));
+            return new Task(parts[1], LocalDate.parse(parts[0]));
         }
         else {
             System.out.println("Error");
