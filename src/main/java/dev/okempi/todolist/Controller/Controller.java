@@ -3,6 +3,7 @@ package dev.okempi.todolist.Controller;
 import dev.okempi.todolist.Model.Model;
 
 import java.io.*;
+import java.time.LocalDate;
 
 public class Controller {
     final private Model model;
@@ -23,6 +24,13 @@ public class Controller {
 
     public int task_amount(){
         return model.task_amount();
+    }
+
+    public void add_task(LocalDate date, String content){
+        if (content == null){
+            return;
+        }
+        model.add_task(date, content);
     }
 
 }

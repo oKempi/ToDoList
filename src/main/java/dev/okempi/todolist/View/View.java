@@ -11,6 +11,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+
 public class View extends Application {
     public final Controller controller;
 
@@ -22,6 +24,9 @@ public class View extends Application {
     public void start(Stage stage) throws Exception {
         //initialization
         controller.load_tasks();
+
+        // methods
+
 
         //graphic part
         VBox root = new VBox(20);
@@ -35,7 +40,10 @@ public class View extends Application {
         Button addTask = new Button("Add task!");
 
         addTask.setOnAction(actionEvent -> {
-
+            String content = txtField.getText();
+            if (date.getValue() != null){
+                controller.add_task(date.getValue(), content);
+            }
         });
 
 
