@@ -33,4 +33,12 @@ public class Controller {
         model.add_task(date, content);
     }
 
+    public String fetch_task(String uuid){
+        return model.fetch_task(uuid);
+    }
+
+    public String fetch_task(int pos){
+        return model.fetch_task(pos);
+    }
+
 }

@@ -28,6 +28,16 @@ public class View extends Application {
         //graphic part
         VBox root = new VBox(20);
         HBox funcs = new HBox(20);
+        VBox TaskBox = new VBox(20);
+
+        // shows the tasks
+        for (int i = 0; i < controller.task_amount(); i++){
+            VBox taskVBox = new VBox(20);
+            String labelContent = controller.fetch_task(i).replace(",", " ");
+            Label taskContent = new Label(labelContent);
+            taskVBox.getChildren().add(taskContent);
+            TaskBox.getChildren().add(taskVBox);
+        }
 
         Label label = new Label("You have " + controller.task_amount() + " tasks");
 
@@ -48,7 +58,7 @@ public class View extends Application {
 
 
         funcs.getChildren().addAll(txtField, date, addTask);
-        root.getChildren().addAll(label, funcs);
+        root.getChildren().addAll(label, funcs, TaskBox);
 
         //some part
         Scene scene = new Scene(root, 800, 600);

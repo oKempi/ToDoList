@@ -36,17 +36,26 @@ public class Model {
     }
 
     // through UUID?
+    // also needs rework because you literally can not access ask from
+    // anywhere else
     public void remove_task(Task task) {
         tasks.remove(task);
         save_tasks();
     }
 
-    public Task fetch_task(String uuid){
+    public String fetch_task(String uuid){
         for (int i = 0; i < tasks.size(); i++){
             String task_uuid = tasks.get(i).getUUID();
             if (task_uuid == uuid){
-                return tasks.get(i);
+                return tasks.get(i).toLine();
             }
+        }
+        return "null";
+    }
+
+    public String fetch_task(int pos){
+        if (tasks.get(pos) != null){
+            return tasks.get(pos).toLine();
         }
         return null;
     }
